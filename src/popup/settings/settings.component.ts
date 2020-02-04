@@ -280,10 +280,8 @@ export class SettingsComponent implements OnInit {
         this.analytics.eventTrack.next({ action: 'Rate Extension' });
         let device = this.platformUtilsService.getDevice();
         // Hack for detecting new Chromium Edge browser
-        if (device == DeviceType.ChromeExtension) {
-            if (window.navigator.userAgent.indexOf(' Edg/') > -1) {
-                device = DeviceType.EdgeExtension;
-            }
+        if (device == DeviceType.ChromeExtension && window.navigator.userAgent.indexOf(' Edg/') > -1) {
+            device = DeviceType.EdgeExtension;
         }
         BrowserApi.createNewTab((RateUrls as any)[device]);
     }
